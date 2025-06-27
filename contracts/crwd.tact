@@ -1,17 +1,17 @@
 import "@stdlib/ownable";
 import "../messages";
 import "../crwd_child";
-import "./messages";
-import "./crwd_child";
+import "..jetton/minter.tact";
+import "../jetton/wallet.tact";
 
 
 
 
 
-contract Crwd with Ownable() {
+contract Crwd with Ownable {
     owner:Address;
     receive() {
-        cashback(sender());
+        
     }
 
     init() {
@@ -30,10 +30,19 @@ contract Crwd with Ownable() {
                 duration = msg.duration,
             ),
             value: ton("0.5"),
-            
-
-
         }); 
+
+        deploy(DeployParameters {
+            init: initOf (
+                ownerAddress: = sender();
+                projectName: = msg.projectName,
+                tokenName = msg.tokenName,
+                tokenSymbolLink = msg.tokenSymbolLink,
+                fundingGoal = msg.fundingGoal,
+                duration = msg.duration,
+            ),
+            value: ton("0.5"),
+        });
     }
 
 
