@@ -3,6 +3,7 @@ import "../messages";
 import "../crwd_child";
 import "..jetton/minter.tact";
 import "../jetton/wallet.tact";
+import "./jetton/minter";
 
 
 
@@ -33,7 +34,7 @@ contract Crwd with Ownable {
         }); 
 
         deploy(DeployParameters {
-            init: initOf (
+            init: initOf JettonMinterSharded(
                 ownerAddress: = sender();
                 projectName: = msg.projectName,
                 tokenName = msg.tokenName,
