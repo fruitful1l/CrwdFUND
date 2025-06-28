@@ -90,16 +90,47 @@ contract Crwd with Ownable {
         self.id += 1;
     }
 
+    receive(msg: Invest) {
+        let projectAddress = self.id_proj.get(msg.project);
+        require(projectAddress != null, "Project not found");
+        dump(self.id_mint.get(msg.project)!!);
+
+
+        send(SendParameters {
+            to: projectAddress!!,
+            value: ton("0.1"), // Adjust the amount as needed
+            mode: SendRemainingValue | SendBounceIfActionFail,
+        });
+        
+        send(SendParameters {
+            to: self.id_mint.get(msg.project)!!,
+            value: ton("0.2"), // Adjust the amount in future
+            mode: SendRemainingValue | SendBounceIfActionFail,
+            body: Mint {
+                queryId: 0,
+                receiver: sender(),
+                mintMessage: JettonTransferInternal {
+                    queryId: 0,
+                    amount: 100, // Adjust the amount in future, ref to value
+                    sender: myAddress(),
+                    responseDestination: sender(),
+                    forwardTonAmount: ton("0.10"),
+                    forwardPayload: beginCell().storeUint(0, 1).endCell().beginParse()
+
+                },
+
+            }.toCell(),
+        })
+    }   
+
     
 
     get fun Minters(): map<Int, Address> {
         return(self.id_mint);
     }
 
-    
-
-    
-
-
+    get fun Projects(): map<Int, Address> {
+        return(self.id_proj);
+    }
 
 }
