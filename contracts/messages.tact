@@ -1,5 +1,4 @@
-import "@stdlib/address";
-import "@stdlib/cell";
+
 
 message(0xddae6e74) DevToMaster {
     projectName: String;
@@ -9,6 +8,10 @@ message(0xddae6e74) DevToMaster {
     duration: Int;
 }
 
+
+message(0x90b2a044) Invest {
+    project: Int;
+}
 
 
 struct JettonData {
@@ -99,10 +102,7 @@ message(0x642b7d07) Mint {
 
 message(22) CloseMinting {}
 
-message(3) ChangeOwner {
-    queryId: Int as uint64;
-    newOwner: Address;
-}
+
 
 // provide_wallet_balance#7ac8d559 receiver:MsgAddress include_verify_info:Bool = InternalMsgBody
 message(0x7ac8d559) ProvideWalletBalance {

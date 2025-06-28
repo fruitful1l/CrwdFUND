@@ -1,5 +1,5 @@
 import "@stdlib/ownable";
-import "../messages";
+import "./messages.tact";
 
 contract CrwdChld(
     ownerAddress: Address,
@@ -8,6 +8,7 @@ contract CrwdChld(
     tokenSymbolLink: String,
     fundingGoal: Int as uint32,
     duration: Int,
+    id: Int,
 
 ) {
 

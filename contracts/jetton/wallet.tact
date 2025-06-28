@@ -1,8 +1,8 @@
 //  SPDX-License-Identifier: MIT
 //  Copyright © 2025 TON Studio
 
-import "./messages";
-import "./constants";
+import "../messages";
+import "../constants";
 import "./shard-utils";
 import "./send";
 import "../utils";

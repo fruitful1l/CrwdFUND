@@ -3,7 +3,7 @@
 
 import "./wallet";
 import "../messages";
-import "./constants";
+import "../constants";
 import "../utils.tact";
 import "../utils";
 import "./shard-utils";
@@ -22,7 +22,13 @@ contract JettonMinterSharded(
     owner: Address,
     jettonContent: Cell,
     mintable: Bool, // Should be deployed with this flag set to true
+    id: Int,
 ) {
+    receive(){
+        require(self.owner == sender(), "not owner");
+        
+    }
+
     receive(msg: ProvideWalletAddress) {
         let ownerWorkchain: Int = parseStdAddress(msg.ownerAddress.asSlice()).workchain;
 
